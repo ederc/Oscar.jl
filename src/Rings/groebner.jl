@@ -111,8 +111,6 @@ function _compute_standard_basis(B::IdealGens, ordering::MonomialOrdering, compl
   if isdefined(BA, :S)
      BA.S.isGB  = true
   end
-  @show BA.S.isGB
-  @show BA.isGB
   return BA
 end
 
