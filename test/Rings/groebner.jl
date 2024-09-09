@@ -120,6 +120,11 @@
     standard_basis_highest_corner(I, ordering=negdeglex(R))
     @test elements(I.gb[negdeglex(R)]) == H
     @test_throws ArgumentError standard_basis_highest_corner(I)
+
+    # issue #4018
+    R,p = polynomial_ring(QQ,"p"=>sort(AbstractAlgebra.combinations(5,2)))
+    I = grassmann_pluecker_ideal(R,2,5)
+    @test dim(I) == 7
 end
 
 @testset "normal form graded" begin
