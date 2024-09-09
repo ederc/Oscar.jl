@@ -382,8 +382,10 @@ function singular_generators(B::IdealGens, monorder::MonomialOrdering=default_or
   isa(B.gens.Ox, MPolyQuoRing) && return B.gens.S
   isdefined(B, :ord) && B.ord == monorder && monomial_ordering(B.Ox, Singular.ordering(base_ring(B.S))) == B.ord && return B.gens.S
   SR = singular_poly_ring(B.Ox, monorder)
-  f = Singular.AlgebraHomomorphism(B.Sx, SR, gens(SR))
-  return Singular.map_ideal(f, B.gens.S)
+  f  = Singular.AlgebraHomomorphism(B.Sx, SR, gens(SR))
+  SI = Singular.map_ideal(f, B.gens.S)
+  SI.isGB = B.isGB
+  return SI
 end
 
 @doc raw"""
