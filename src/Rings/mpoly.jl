@@ -384,7 +384,9 @@ function singular_generators(B::IdealGens, monorder::MonomialOrdering=default_or
   SR = singular_poly_ring(B.Ox, monorder)
   f  = Singular.AlgebraHomomorphism(B.Sx, SR, gens(SR))
   SI = Singular.map_ideal(f, B.gens.S)
-  SI.isGB = B.isGB
+  if isdefined(B, :ord) && B.ord == monorder
+    SI.isGB = B.isGB
+  end
   return SI
 end
 
